@@ -1,198 +1,279 @@
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-%	The MIT License (MIT)
-%
-%	Copyright (c) 2021 Jitin Nair
-%
-%	Permission is hereby granted, free of charge, to any person obtaining a copy
-%	of this software and associated documentation files (the "Software"), to deal
-%	in the Software without restriction, including without limitation the rights
-%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%	copies of the Software, and to permit persons to whom the Software is
-%	furnished to do so, subject to the following conditions:
-%	
-%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-%	THE SOFTWARE.
-%	
-%
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
 
-%----------------------------------------------------------------------------------------
-%	DOCUMENT DEFINITION
-%----------------------------------------------------------------------------------------
+\documentclass[letterpaper,11pt]{article}
 
-% article class because we want to fully customize the page and not use a cv template
-\documentclass[a4paper,12pt]{article}
-
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
-
-% % fontspec allows you to use TTF/OTF fonts directly
-% \usepackage{fontspec}
-% \defaultfontfeatures{Ligatures=TeX}
-
-% % modified for ShareLaTeX use
-% \setmainfont[
-% SmallCapsFont = Fontin-SmallCaps.otf,
-% BoldFont = Fontin-Bold.otf,
-% ItalicFont = Fontin-Italic.otf
-% ]
-% {Fontin.otf}
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES
-%----------------------------------------------------------------------------------------
-\usepackage{url}
-\usepackage{parskip} 	
-
-%other packages for formatting
-\RequirePackage{color}
-\RequirePackage{graphicx}
-\usepackage[usenames,dvipsnames]{xcolor}
-\usepackage[scale=0.9]{geometry}
-
-%tabularx environment
-\usepackage{tabularx}
-
-%for lists within experience section
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
 \usepackage{enumitem}
-
-% centered version of 'X' col. type
-\newcolumntype{C}{>{\centering\arraybackslash}X} 
-
-%to prevent spillover of tabular into next pages
-\usepackage{supertabular}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
 \usepackage{tabularx}
-\newlength{\fullcollw}
-\setlength{\fullcollw}{0.47\textwidth}
-
-%custom \section
-\usepackage{titlesec}				
+\usepackage{fontawesome5}
 \usepackage{multicol}
-\usepackage{multirow}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
 
-%CV Sections inspired by: 
-%http://stefano.italians.nl/archives/26
-\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{10pt}{10pt}
-
-%for publications
-\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
-
-%Setup hyperref package, and colours for links
-\usepackage[unicode, draft=false]{hyperref}
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
-\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
-\addbibresource{citations.bib}
-\setlength\bibitemsep{1em}
-
-%for social icons
 \usepackage{fontawesome5}
 
-%debug page outer frames
-%\usepackage{showframe}
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
 
-%----------------------------------------------------------------------------------------
-%	BEGIN DOCUMENT
-%----------------------------------------------------------------------------------------
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\collegeItem}[1]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small } \\
+    \end{tabular*}\vspace{-4pt}
+}
+
+\newcommand{\texthash}{\#}
+\newcommand{\percent}{\%}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \begin{document}
 
-% non-numbered pages
-\pagestyle{empty} 
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
 
-%----------------------------------------------------------------------------------------
-%	TITLE
-%----------------------------------------------------------------------------------------
+\begin{center}
+    {\Huge \scshape Prem Kumar} \\ \vspace{1pt}
+    Lakhisarai, Bihar, India 811311 \\ \vspace{1pt}
+    \href{tel:919470678079}{\color{MidnightBlue} \raisebox{-0.2\height}\faPhone\
+    \underline {+91 9470678079}} ~ \href{mailto:premraj259@outlook.com}{\color{MidnightBlue} \raisebox{-0.2\height}\faEnvelope\  \underline{premraj259@outlook.com}} ~ 
+    \href{https://linkedin.com/in/prem-kr/}{\color{MidnightBlue} \raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/prem-kr}}  ~
+    \href{https://github.com/}{\color{MidnightBlue} \raisebox{-0.2\height}\faGithub\ \underline{github.com/rpremofficial}}
+    \vspace{-8pt}
+\end{center}
 
-% \begin{tabularx}{\linewidth}{ @{}X X@{} }
-% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
-% \raisebox{-0.05\height}\faGithub\ username \ | \
-% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
-% \end{tabularx}
 
-\begin{tabularx}{\linewidth}{@{} C @{}}
-\Huge{Your Name} \\[7.5pt]
-\href{https://github.com/username}{\raisebox{-0.05\height}\faGithub\ username} \ $|$ \ 
-\href{https://linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
-\href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
-\href{mailto:email@mysite.com}{\raisebox{-0.05\height}\faEnvelope \ email@mysite.com} \ $|$ \ 
-\href{tel:+000000000000}{\raisebox{-0.05\height}\faMobile \ +00.00.000.000} \\
-\end{tabularx}
-
-%----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
-%----------------------------------------------------------------------------------------
-
-%Interests/ Keywords/ Summary
-\section{Summary}
-This CV is automatically generated and deployed using the \href{https://github.com/jitinnair1/autoCV}{autoCV} template along with GitHub Actions such that a new version of the CV is compiled, published and ready for use when the cv.tex file is updated. For details, \href{https://github.com/jitinnair1/autoCV}{click here}.
-
-%Experience
-\section{Work Experience}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Designation} & \hfill Jan 2021 - present \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width}  \\
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Designation} & \hfill Mar 2019 - Jan 2021 \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
-        \item[--] long long line of blah blah that will wrap when the table fills the column width
-        \item[--] again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah. again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah
-    \end{itemize}
-    \end{minipage}
-}
-\end{tabularx}
-
-%Projects
-\section{Projects}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Some Project} & \hfill \href{https://some-link.com}{Link to Demo} \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width}  \\
-\end{tabularx}
-
-%----------------------------------------------------------------------------------------
-%	EDUCATION
-%----------------------------------------------------------------------------------------
+%-----------EDUCATION-----------
 \section{Education}
-\begin{tabularx}{\linewidth}{@{}l X@{}}	
-2030 - present & PhD (Subject) at \textbf{University} \hfill \normalsize (GPA: 4.0/4.0) \\
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Indian Institute of Information Technology Bhagalpur}{Nov 2020 -- July 2024}
+      {Bachelor of Technology in Computer Science and Engineering}{Bhagalpur, Bihar}
+  \resumeSubHeadingListEnd
+  \collegeItemsistStart
+  \collegeItem{\textbf{Cgpa:} 7.38 (absolute)}
+  \collegeItem{\textbf{Relevant Coursework:} Data Structures, Algorithms, OOPS, DBMS, Operating System, AI/ML, Software Engineering}
+  \collegeItemsisEnd
+\vspace{-2pt}
+  
 
-2023 - 2027 & Bachelor's Degree at \textbf{College} \hfill (GPA: 4.0/4.0) \\ 
+% %------RELEVANT COURSEWORK-------
+% \section{Relevant Coursework}
+%     %\resumeSubHeadingListStart
+%         \begin{multicols}{4}
+%             \begin{itemize}[itemsep=-5pt, parsep=3pt]
+%                 \item\small Data Structures
+%                 \item Algorithms
+%                 \item Operating System
+%                 \item Database Management
+%                 \item Artificial Intelligence
+%                 \item Computer Networking
+%                 \item Systems Design
+%                 \item Computer Architecture
+%             \end{itemize}
+%         \end{multicols}
+%         \vspace*{2.0\multicolsep}
+%     %\resumeSubHeadingListEnd
 
-2022 & Class 12th Some Board \hfill  (Grades) \\
 
-2021 & Class 10th Some Board \hfill  (Grades) \\
-\end{tabularx}
+%-----------EXPERIENCE-----------
+\section{Internship}
+  \resumeSubHeadingListStart
 
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS
-%----------------------------------------------------------------------------------------
-\section{Publications}
-\begin{refsection}[citations.bib]
-\nocite{*}
-\printbibliography[heading=none]
-\end{refsection}
+    \resumeSubheading
+      {Glocybs (cybersecurity startup)}{May 2022 -- July 2022}
+      {Full Stack Developer Intern}{Noida, UP}
+      \resumeItemListStart
+        \resumeItem{Contributed in \textbf{development of app and website} having features like account management, subscription notification, and 24/7 customer support (AI Chat-bot) to address cyberattack \& bugs/issues.}
+        \resumeItem{Acquired expertise in \textbf{building \& hosting fully functional website} and utilized Firebase \& MongoDB for developing \& testing. Collaborated regularly using Git \& GitHub for the duration of 2 months.}
+      \resumeItemListEnd
+    
+  \resumeSubHeadingListEnd
+\vspace{-16pt}
 
-%----------------------------------------------------------------------------------------
-%	SKILLS
-%----------------------------------------------------------------------------------------
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+          {\textbf{\href{https://github.com/TnP-Cell/Student-Portal}{\color{MidnightBlue} \underline{Student and Admin portal}}} $|$ \emph{ReactJS, Node.Js, JavaScript, CSS, PostgreSQL} $|$ \emph{\color{MidnightBlue} \href{https://github.com/TnP-Cell/Student-Portal}\faGithub{}}}{May 2023 - July 2023}
+          \resumeItemListStart
+            \resumeItem{Designed and Developed a \textbf{one stop platform} from scratch to simplify the process of multiple administration and 1000+ students in college.}
+            \resumeItem{Student portal: Having features like \textbf{Dashboard, Fee payment, Course registration, result checking} and access to  various \textbf{documents/forms.} As a result we reduced the process time from 3 days to 1/2 minutes.}
+            \resumeItem{Admin portal: Contains \textbf{multiple roles} having features like \textbf{managing fee, approval for result/registration, generating bulk receipts, and basic automations} (like late fines, summary creation, reminders).}
+        \resumeItemListEnd
+        \vspace{-13pt}
+        \resumeProjectHeading
+          {\textbf{\href{https://tnp.iiitbh.ac.in/}{\color{MidnightBlue} \underline{Placement Portal}}} $|$ \emph{JavaScript, Node.js, MongoDB} $|$ \emph{\color{MidnightBlue} \href{https://github.com/TnP-Cell/Frontend-TnP}\faGithub{}}}{Apr 2022 - Jun 2022}
+          \resumeItemListStart
+            \resumeItem{Developed a single window portal for College Training and Placement Cell with \textbf{2,000+ active users} for Internship and Placement management.}
+            \resumeItem{Created a \textbf{dashboard} for students, recruiters, and an admin center for TPC officers to streamline news publishing, event conducting, and document management, reducing management time by 30{\percent}}
+            \resumeItem{Implemented features such as gallery, past recruiters marquee, statistics of 3 years, with a \textbf{modern user interface.}}
+        \resumeItemListEnd
+        \vspace{-13pt}
+        \resumeProjectHeading
+          {\textbf{\href{https://otarea.in/}{\color{MidnightBlue} \underline{Otarea.in}}} $|$ \emph{HTML, CSS, JavaScript, Azure} $|$ \emph{\color{MidnightBlue} \href{https://github.com/Otarea/Otarea_old}\faGithub{}}}{Oct 2021 - Feb 2022}
+          \resumeItemListStart
+            \resumeItem{Building a \textbf{business-oriented platform} for design product/services with education and support sections.}
+            \resumeItem{Created a \textbf{portfolio} of 100+ editable design templates with an education section having documentations and videos.}
+            \resumeItem{Integrated collaborative features such as \textbf{blogs, digital whiteboard, and a chat-bot} using JavaScript and an API.}
+        \resumeItemListEnd 
+        % \vspace{-13pt}
+        % \resumeProjectHeading
+        %   {\textbf{One Stop Platform for Entrepreneurs} $|$ \emph{ React.JS, AWS, MySQL, Firebase}}{Feb 2022 - Apr 2022}
+        %   \resumeItemListStart
+        %     \resumeItem{Developed one stop platform providing various features to support entrepreneurs  with ideation, registration, incubation, mentorship, funding, and marketing.}
+        %     \resumeItem{As a \textbf{team lead} (of 6 people)  in Smart India Hackathon 2022 played key role in ideation of project, web development, and solution presentation.}
+        % \resumeItemListEnd 
+    \resumeSubHeadingListEnd
+\vspace{-13pt}
+
+
+%
+%-----------PROGRAMMING SKILLS-----------
 \section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-Some Skills &  \normalsize{This, That, Some of this and that etc.}\\
-Some More Skills  &  \normalsize{Also some more of this, Some more that, And some of this and that etc.}\\  
-\end{tabularx}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming languages}{: C++, JavaScript, CSS, HTML} \\
+     \textbf{Web development}{: React.JS, Node.js, Bootstrap} \\
+     \textbf{UI/UX design}{: Figma, prototyping} \\
+     \textbf{Technologies/Platforms}{: Azure, Firebase, MongoDB, Git, Github} \\
+    }}
+ \end{itemize}
+ \vspace{-16pt}
 
-\vfill
-\center{\footnotesize Last updated: \today}
+
+%-----------INVOLVEMENT---------------
+\section{Achievements}
+    \resumeSubHeadingListStart
+        % \resumeSubheading{Fraternity}{Spring 2020 -- Present}{President}{University Name}
+            \resumeItemListStart
+                \resumeItem{\textbf{Got project offer from Bhagalpur Police:} Will be working to simplify process and solve a real world problem.}
+                \resumeItem{\textbf{Won Smart India Internal Hackathon:} Led the team and finished in top 5 out of 25 participating teams.}
+                \resumeItem{\textbf{Solved 600+ Coding Questions:} Demonstrated proficiency in coding by solving over 300+ questions on 
+                {{\href{https://leetcode.com/rpremofficial/}{\color{MidnightBlue} \underline{\textbf{LeetCode}}}}}, 200+ on 
+                {{\href{https://codeforces.com/profile/kr.prem}{\color{MidnightBlue} \underline{\textbf{Codeforces}}}}}
+                and rest on others. Participated regularly in coding contests on various online platforms.}
+                \resumeItem{\textbf{Achieved 3 Star on {{\href{https://www.codechef.com/users/rpremofficial}{\color{MidnightBlue} \underline{CodeChef:}}}}} with best global rank 157 and total rating of 1665 points.}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+    \vspace{-13pt}
+
+
+\section{Extracurricular / Position of responsibility}
+    \resumeSubHeadingListStart
+        % \resumeSubheading{Fraternity}{Spring 2020 -- Present}{President}{University Name}
+            \resumeItemListStart
+                \resumeItem{\textbf{Led design/branding team and Managed business/tech events:} in Enyugma, techno-cultural fest 2022.}
+                \resumeItem{\textbf{Training \& Placement Coordinators:} Worked in the College Placement Division, hosted 20+ events related to technical and personal skills, building strong connections between 200+ recruiters and 1200+ students/alumni.}
+                \vspace{2pt}
+                \resumeItem{\textbf{Elected as Head of Design Team:} while leading design team of the college honed my UI and UX skills, Designed and improved existing design of over 25 websites and apps. Enhanced the quality and appeal of the college events/clubs.}
+                \vspace{2pt}
+                \resumeItem{\textbf{Appointed as Entrepreneurship Club Coordinator:} Led a team of \textbf{30+ student entrepreneurs}, utilizing leadership, collaboration, and analytic skills. Gained hands-on experience in developing user-centric software solutions.}
+            \resumeItemListEnd
+        
+    \resumeSubHeadingListEnd
+
 
 \end{document}
